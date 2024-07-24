@@ -136,3 +136,9 @@ class StaticCache(Cache, torch.nn.Module):
             for layer_idx in range(len(past_key_values)):
                 key_states, value_states = past_key_values[layer_idx]
                 self.update(key_states, value_states, layer_idx, cache_kwargs)
+
+    def __hash__(self):
+        return id(self)
+
+    def __eq__(self, other):
+        return id(self) == id(other)
